@@ -42,10 +42,19 @@ if (YII_ENV_DEV) {
     ];
 }
 ```
-
+And register embedded controller:
+```php
+$config = [
+    ...
+    'controllerMap' => [
+        'wce-embed' => '\ianikanov\wce\Controller',
+    ],
+    ...
+];
+```
 Then run gii, select "CRUD Controller Widget" fill the form and generate the code.
 
-To use widget in any other form.
+To use widget in any other form follow examples below.
 
 To show list of items, for example, the list of Posts related to the current model:
 ```php
