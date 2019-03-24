@@ -40,7 +40,8 @@ if (YII_ENV_DEV) {
             ],
         ],
     ];
-}```
+}
+```
 
 Then run gii, select "CRUD Controller Widget" fill the form and generate the code.
 
