@@ -1,0 +1,21 @@
+{
+    "name": "ianikanov/yii2-wce",
+    "description": "Ability to generate widgets with interface similar to controller with basic CRUD actions for specific model",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","widget","crud"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ivan Anikanov",
+            "email": "ivan.anikanov@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ianikanov\\wce\\": ""
+        }
+    }
+}
