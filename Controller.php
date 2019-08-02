@@ -53,7 +53,7 @@ class Controller extends \yii\web\Controller {
         $className = preg_replace_callback('%-([a-z0-9_])%i', function ($matches) {
                 return ucfirst($matches[1]);
             }, ucfirst($id)) . 'ControllerWidget';
-        $className = ltrim($this->controllerNamespace . '\\' . str_replace('/', '\\', $prefix) . $className, '\\');
+        $className = ltrim($this->controllerNamespace . '\\' . $className, '\\');
         
         
         $result = forward_static_call([$className, 'widget'], [
