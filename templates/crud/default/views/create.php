@@ -22,7 +22,7 @@ use yii\bootstrap\Modal;
     <?= "<?php\n" ?>
     Modal::begin([
         'header' => '<h2>'.Html::encode('Create <?= StringHelper::basename($generator->modelClass) ?>').'</h2>',
-        'toggleButton' => ['tag' => 'a', 'label' => 'Create <?= StringHelper::basename($generator->modelClass) ?>', 'class' => 'btn btn-success'],
+        'toggleButton' => ['tag' => 'a', 'label' => '<span class="glyphicon glyphicon-plus-sign"></span>', 'title' => 'Create <?= StringHelper::basename($generator->modelClass) ?>', 'style' => 'cursor: pointer'],
     ]);
 
     echo $this->render('_form', [

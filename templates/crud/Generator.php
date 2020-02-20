@@ -33,6 +33,7 @@ use yii\web\Controller;
 class Generator extends \yii\gii\Generator
 {
     public $modelClass;
+    public $owner_id_property;
     public $controllerClass;
     public $viewPath = '@app/widgets/views/';
     public $baseControllerClass = '\ianikanov\wce\Widget';
@@ -80,7 +81,7 @@ class Generator extends \yii\gii\Generator
             [['modelClass'], 'validateModelClass'],
             [['enableI18N', 'enablePjax'], 'boolean'],
             [['messageCategory'], 'validateMessageCategory', 'skipOnEmpty' => false],
-            ['viewPath', 'safe'],
+            [['viewPath', 'owner_id_property'], 'safe'],
         ]);
     }
 
@@ -91,6 +92,7 @@ class Generator extends \yii\gii\Generator
     {
         return array_merge(parent::attributeLabels(), [
             'modelClass' => 'Model Class',
+            'owner_id_property' => 'Property referring to owner ID',
             'controllerClass' => 'Widget Controller Class',
             'viewPath' => 'View Path',
             'baseControllerClass' => 'Base Controller Class',
@@ -108,6 +110,8 @@ class Generator extends \yii\gii\Generator
         return array_merge(parent::hints(), [
             'modelClass' => 'This is the ActiveRecord class associated with the table that CRUD will be built upon.
                 You should provide a fully qualified class name, e.g., <code>app\models\Post</code>.',
+            'owner_id_property' => 'Optional. If model has a single property referring to the owner ID you can set it automatically.
+                You should provide a single property name, e.g., <code>topic_id</code>',
             'controllerClass' => 'This is the name of the widget controller class to be generated. You should
                 provide a fully qualified namespaced class (e.g. <code>app\widgets\PostControllerWidget</code>),
                 and class name should be in CamelCase with an uppercase first letter.',
@@ -223,6 +227,9 @@ class Generator extends \yii\gii\Generator
      */
     public function generateActiveField($attribute)
     {
+        if ($attribute == $this->owner_id_property) {
+            return "Html::activeHiddenInput(\$model, '$attribute')";
+        }
         $tableSchema = $this->getTableSchema();
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
             if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {

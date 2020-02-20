@@ -8,7 +8,7 @@ use yii\helpers\StringHelper;
 
 
 /* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\crud\Generator */
+/* @var $generator ianikanov\wce\templates\crud\Generator */
 
 $controllerClass = StringHelper::basename($generator->controllerClass);
 $modelClass = StringHelper::basename($generator->modelClass);
@@ -49,7 +49,7 @@ class <?= $controllerClass ?> extends <?= $generator->baseControllerClass . "\n"
      * Lists all <?= $modelClass ?> models.
      * @return mixed
      */
-    public function actionIndex($query)
+    public function actionIndex($query<?= $generator->owner_id_property ? ', $owner_id' : '' ?>)
     {
 <?php if (!empty($generator->searchModelClass)): ?>
         $searchModel = new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>();
@@ -66,6 +66,8 @@ class <?= $controllerClass ?> extends <?= $generator->baseControllerClass . "\n"
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            <?= $generator->owner_id_property ? '\'owner_id\' => $owner_id,' : '' ?>
+            
         ]);
 <?php endif; ?>
     }
@@ -88,9 +90,10 @@ class <?= $controllerClass ?> extends <?= $generator->baseControllerClass . "\n"
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate(<?= $generator->owner_id_property ? '$owner_id' : '' ?>)
     {
         $model = new <?= $modelClass ?>();
+        <?= $generator->owner_id_property ? '$model->' .$generator->owner_id_property . ' = $owner_id;' : '' ?>
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return 'success';

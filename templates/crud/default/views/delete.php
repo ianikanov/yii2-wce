@@ -22,8 +22,7 @@ use yii\widgets\DetailView;
 ?>
 <span class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-widget-delete">
 
-    <?= "<?= " ?>Html::a(<?= $generator->generateString('Delete') ?>, [$embeddedController, 'action' => '<?= $generator->controllerID ?>/delete', <?= $urlParams ?>, 'callback' => \Yii::$app->request->url], [
-        'class' => 'btn btn-danger',
+    <?= "<?= " ?>Html::a('<span class="glyphicon glyphicon-trash"></span>', [$embeddedController, 'action' => '<?= $generator->controllerID ?>/delete', <?= $urlParams ?>, 'callback' => \Yii::$app->request->url], [
         'data' => [
             'confirm' => <?= $generator->generateString('Are you sure you want to delete this item?') ?>,
             'method' => 'post',

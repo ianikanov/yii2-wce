@@ -4,7 +4,7 @@ use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
 /* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\crud\Generator */
+/* @var $generator ianikanov\wce\templates\crud\Generator */
 
 $urlParams = $generator->generateUrlParams();
 $nameAttribute = $generator->getNameAttribute();
@@ -18,6 +18,8 @@ use <?= $generator->indexWidgetType === 'grid' ? "yii\\grid\\GridView" : "yii\\w
 
 /* @var $this yii\web\View */
 <?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
+<?= !empty($generator->owner_id_property) ? '/* @var $owner_id integer */' : '' ?>
+
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $embeddedController string Route to embedded controller */
 
@@ -31,7 +33,7 @@ use <?= $generator->indexWidgetType === 'grid' ? "yii\\grid\\GridView" : "yii\\w
 <?php endif; ?>
 
     <p>
-        <?= "<?= " ?><?= $generator->controllerClass ?>::widget(['action' => 'create']) ?>
+        <?= "<?= " ?><?= $generator->controllerClass ?>::widget(['action' => 'create'<?= !empty($generator->owner_id_property) ? ', \'params\'=>[\'owner_id\' => $owner_id]' : '' ?>]) ?>
     </p>
 
 <?php if ($generator->indexWidgetType === 'grid'): ?>
