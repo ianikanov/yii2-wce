@@ -63,7 +63,11 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
     }
 }
 ?>
-
+            [
+                'format' => 'raw',
+                'value' => function ($model) { return <?= $generator->controllerClass ?>::widget(['action' => 'update', 'params'=>['id' => $model->id]])
+                        . ' ' . <?= $generator->controllerClass ?>::widget(['action' => 'delete', 'params'=>['id' => $model->id]]);; }
+            ],
         ],
     ]); ?>
 <?php else: ?>

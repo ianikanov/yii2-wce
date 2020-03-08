@@ -98,6 +98,14 @@ class <?= $controllerClass ?> extends <?= $generator->baseControllerClass . "\n"
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return 'success';
         }
+        
+        if ($model->hasErrors()) {
+            foreach ($model->errors as $field => $messages) {
+                foreach ($messages as $message) {
+                    Yii::$app->session->addFlash('error', "$field: $message");
+                }
+            }
+        }
 
         return $this->render('create', [
             'model' => $model,
@@ -117,6 +125,14 @@ class <?= $controllerClass ?> extends <?= $generator->baseControllerClass . "\n"
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return 'success';
+        }
+        
+        if ($model->hasErrors()) {
+            foreach ($model->errors as $field => $messages) {
+                foreach ($messages as $message) {
+                    Yii::$app->session->addFlash('error', "$field: $message");
+                }
+            }
         }
 
         return $this->render('update', [
